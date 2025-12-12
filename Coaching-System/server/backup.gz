@@ -1,0 +1,7 @@
+# उदाहरण: backup.gz फ़ाइल से पुनर्स्थापित करना
+mongorestore \
+    --uri="mongodb://localhost:27017" \
+    --gzip \
+    --archive="/path/to/your/backup/folder/your_database_name-TIMESTAMP.gz" \
+    --nsFrom="$DB_NAME.*" \
+    --nsTo="$DB_NAME.*"
