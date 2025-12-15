@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/globals.css'
 import Script from "next/script";
 import { useRouter } from "next/router";
-import ProtectedRoute from "../components/ProtectedRoute";
+import protectedRoute from "../components/ProtectedRoute";
 
 const openRoutes = ["/login", "/signup"]; // not protected
 
@@ -28,3 +28,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
