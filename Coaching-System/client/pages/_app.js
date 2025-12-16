@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/globals.css'
 import Script from "next/script";
 import { useRouter } from "next/router";
-import protectedRoute from "../components/protectedRoute.jsx";
+import ProtectedRoute from "../components/ProtectedRoute.js";
 
 const openRoutes = ["/login", "/signup"]; // not protected
 
@@ -19,15 +19,16 @@ function MyApp({ Component, pageProps }) {
       {isOpenRoute ? (
         <Component {...pageProps} />
       ) : (
-        <protectedRoute>
+        <ProtectedRoute>
           <Component {...pageProps} />
-        </protectedRoute>
+        </ProtectedRoute>
       )}
     </>
   );
 }
 
 export default MyApp;
+
 
 
 
