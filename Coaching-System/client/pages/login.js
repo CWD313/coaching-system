@@ -6,17 +6,27 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+
   async function submit(e){
     e.preventDefault();
     try{
-      const res = await axios.post('/api/auth/login', { email, password });
+      // --------------------- FIX: 404 Error Solved ---------------------
+      // 1. Backend URL (NEXT_PUBLIC_API) का उपयोग किया जा रहा है।
+      // 2. API पाथ को अनुमानित सही Backend पाथ '/api/users/login' में बदला गया है।
+      //    (हमने app.js में राउटिंग को app.use("/api/users", userRouter); के लिए सेट किया था)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/api/users/login`, { email, password });
+      // -----------------------------------------------------------------
+
       // store token and redirect
       localStorage.setItem('token', res.data.token);
       router.push('/dashboard');
     }catch(err){
-      alert(err.response?.data?.error || 'Error');
+      // बेहतर त्रुटि प्रबंधन (error handling) के लिए console.error जोड़ें
+      console.error("Login failed:", err);
+      alert(err.response?.data?.error || 'Login Error: Check network or credentials.');
     }
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={submit} className="p-6 border rounded">
