@@ -16,9 +16,9 @@ const app = express();
 // ---------------------- CORS Configuration ----------------------
 // Frontend URL को अनुमति दें
 app.use(cors({
-    origin: 'https://coaching-system-pi2m.onrender.com', // <--- यहां अपनी Frontend URL डालें
+    origin:'https://coaching-system-pi2m.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // अगर आप कुकीज़ या ऑथराइज़ेशन हेडर भेज रहे हैं
+    credentials: true, 
 }));
 
 //
@@ -75,4 +75,5 @@ cron.schedule("0 8 * * *", () => {
 //
 
 module.exports = app; // मान लीजिए कि आप app को export करके किसी दूसरी फ़ाइल में सर्वर स्टार्ट करते हैं
+
 
