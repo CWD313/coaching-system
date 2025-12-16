@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function protectedRoute({ children }) {
+export default function ProtectedRoute({ children }) {
   const router = useRouter();
 
   useEffect(() => {
