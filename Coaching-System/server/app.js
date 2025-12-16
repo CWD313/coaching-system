@@ -1,5 +1,6 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
+const cors = require("cors");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const cron = require("node-cron");
@@ -12,11 +13,17 @@ const studentRouter = require("./routes/studentRoutes");
 
 const app = express();
 
+// ---------------------- CORS Configuration ----------------------
+// Frontend URL को अनुमति दें
+app.use(cors({
+    origin: 'https://coaching-system-pi2m.onrender.com', // <--- यहां अपनी Frontend URL डालें
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // अगर आप कुकीज़ या ऑथराइज़ेशन हेडर भेज रहे हैं
+}));
+
 //
 // ---------------------- SECURITY MIDDLEWARES ----------------------
-//
-
-// Rate limiter
+// ... बाकी मिडिलवेयर
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 200,
@@ -68,3 +75,4 @@ cron.schedule("0 8 * * *", () => {
 //
 
 module.exports = app; // मान लीजिए कि आप app को export करके किसी दूसरी फ़ाइल में सर्वर स्टार्ट करते हैं
+
